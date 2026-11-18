@@ -6,6 +6,8 @@ def ensinar():
     with open("cerebro.txt", "a", encoding="utf-8") as arquivo:
         arquivo.write(f"{pergunta}-{resposta}\n")
 
+    print("Conhecimento salvo com sucesso!")
+
 
 def conversar():
     fala = input("Você: ").strip().lower()
@@ -22,15 +24,15 @@ def conversar():
                 pergunta_salva, resposta_salva = dados
 
                 if fala == pergunta_salva:
-                    print(f"bot: {resposta_salva}")
+                    print(f"PyBot: {resposta_salva}")
                     encontrou = True
                     break
 
         if not encontrou:
-            print("bot: Desculpe, não sei a resposta. Use a opção 2 para me ensinar.")
+            print("PyBot: Desculpe, não sei a resposta. Use a opção 2 para me ensinar.")
 
     except FileNotFoundError:
-        print("bot: Meu cérebro está vazio! Me ensine algo primeiro.")
+        print("PyBot: Meu cérebro está vazio! Me ensine algo primeiro.")
 
 
 def listar_conhecimento():
@@ -53,8 +55,12 @@ def listar_conhecimento():
         for item in base_dados:
             print(f"Pergunta: {item[0]} -> Resposta: {item[1]}")
 
+        if not base_dados:
+            print("Nenhum conhecimento cadastrado.")
+
     except FileNotFoundError:
         print("Nenhum dado cadastrado ainda.")
+
 
 while True:
     print("\n--- PYBOT ---")
@@ -63,7 +69,7 @@ while True:
     print("3 - Listar conhecimentos")
     print("0 - Sair")
 
-    opcao = input("Escolha uma opção: ")
+    opcao = input("Escolha uma opção: ").strip()
 
     if opcao == "1":
         conversar()
@@ -79,4 +85,4 @@ while True:
         break
 
     else:
-        print("Opção inválida!")
+        print("Opção inválida! Digite 1, 2, 3 ou 0.")
